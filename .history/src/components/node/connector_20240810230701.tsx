@@ -27,6 +27,9 @@ export const withNode = <T extends {}>(
         connectors: { connect, drag },
       } = useNode();
 
+      const className = (props as { className?: string }).className;
+
+
       const { isActive } = useEditor((_, query) => ({
         isActive: query.getEvent('selected').contains(id),
       }));
@@ -83,7 +86,7 @@ export const withNode = <T extends {}>(
     importPathMapKey && importPathMap[importPathMapKey]
   );
 
-  (WithNode ).craft = {
+  (WithNode as any).craft = {
     displayName: Component.displayName,
     custom: {
       importPath: importPathMapKey ? importPathMap[importPathMapKey] || '' : '',

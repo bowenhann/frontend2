@@ -4,13 +4,12 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { SettingsControl } from '@/components/settings-control';
 import { cn } from '@/lib/utils';
 
-// 定义 AvatarComponent 的 props 类型
 interface AvatarComponentProps {
   src?: string;
   alt?: string;
   fallback?: string;
   className?: string;
-  [key: string]: any; // 允许其他属性
+  [key: string]: any;
 }
 
 const AvatarComponent: React.FC<AvatarComponentProps> = ({ 
@@ -30,35 +29,33 @@ const AvatarComponent: React.FC<AvatarComponentProps> = ({
 
 const draggable = true;
 
-// 使用 Partial 使所有属性变为可选
-type NodeProps = Partial<AvatarComponentProps>;
-
-const NodeAvatarBase = withNode(AvatarComponent, {
-  draggable,
-});
-
-export const NodeAvatar = Object.assign(NodeAvatarBase, {
-  craft: {
-    displayName: 'Avatar',
-    props: {
-      src: '',
-      alt: '',
-      fallback: '',
-      className: '',
-    },
-    related: {
-      toolbar: SettingsControl,
-    },
-  },
-});
-
-// 类型断言，确保 NodeAvatar 有正确的类型
-(NodeAvatar as React.FC<NodeProps> & {
-  craft: {
-    displayName: string;
-    props: NodeProps;
-    related: {
-      toolbar: typeof SettingsControl;
-    };
+interface CraftConfig {
+  displayName: string;
+  props: {
+    [key: string]: any;
   };
-});
+  related: {
+    toolbar: React.ComponentType<any>;
+  };
+}
+
+type NodeAvatarType = React.ComponentType<AvatarComponentProps> & {
+  craft: CraftConfig;
+};
+
+export const NodeAvatar: NodeAvatarType = withNode(AvatarComponent, {
+  draggable,
+}) as NodeAvatarType;
+
+NodeAvatar.craft = {
+  displayName: 'Avatar',
+  props: {
+    src: '',
+    alt: '',
+    fallback: '',
+    className: '',
+  },
+  related: {
+    toolbar: SettingsControl,
+  },
+};

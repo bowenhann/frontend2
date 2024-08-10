@@ -27,6 +27,9 @@ export const withNode = <T extends {}>(
         connectors: { connect, drag },
       } = useNode();
 
+      const className = (props as { className?: string }).className;
+
+
       const { isActive } = useEditor((_, query) => ({
         isActive: query.getEvent('selected').contains(id),
       }));
@@ -54,7 +57,7 @@ export const withNode = <T extends {}>(
           ref={applyRef}
           {...props}
           className={
-            isActive ? `${props.className} component-selected` : props.className
+            isActive ? `${className} component-selected` : className
           }
         >
           {typeof props.children === 'string' &&

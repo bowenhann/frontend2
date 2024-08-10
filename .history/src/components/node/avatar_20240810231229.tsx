@@ -30,35 +30,35 @@ const AvatarComponent: React.FC<AvatarComponentProps> = ({
 
 const draggable = true;
 
-// 使用 Partial 使所有属性变为可选
-type NodeProps = Partial<AvatarComponentProps>;
-
-const NodeAvatarBase = withNode(AvatarComponent, {
-  draggable,
-});
-
-export const NodeAvatar = Object.assign(NodeAvatarBase, {
-  craft: {
-    displayName: 'Avatar',
-    props: {
-      src: '',
-      alt: '',
-      fallback: '',
-      className: '',
-    },
-    related: {
-      toolbar: SettingsControl,
-    },
-  },
-});
-
-// 类型断言，确保 NodeAvatar 有正确的类型
-(NodeAvatar as React.FC<NodeProps> & {
+// 定义 NodeAvatar 的类型，包括 craft 属性
+interface NodeAvatarType extends React.FC<AvatarComponentProps> {
   craft: {
     displayName: string;
-    props: NodeProps;
+    props: {
+      src: string;
+      alt: string;
+      fallback: string;
+      className: string;
+    };
     related: {
-      toolbar: typeof SettingsControl;
+      toolbar: React.ComponentType<any>;
     };
   };
-});
+}
+
+export const NodeAvatar: NodeAvatarType = withNode(AvatarComponent, {
+  draggable,
+}) as NodeAvatarType;
+
+NodeAvatar.craft = {
+  displayName: 'Avatar',
+  props: {
+    src: '',
+    alt: '',
+    fallback: '',
+    className: '',
+  },
+  related: {
+    toolbar: SettingsControl,
+  },
+};
