@@ -18,7 +18,7 @@ export const NodeAccordion = ({
   return (
     <Accordion 
     ref={(ref) => connect(drag(ref)) as any}
-      type={type as any}
+      type={type}
       collapsible={type === 'single' ? collapsible : undefined}
       defaultValue={defaultValue ? [defaultValue] : undefined}
       disabled={disabled}

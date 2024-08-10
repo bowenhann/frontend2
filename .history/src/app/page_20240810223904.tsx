@@ -207,7 +207,57 @@ const safeStringify = (obj, indent = 2) => {
 };
 
 
+// Function to convert string to component configuration
+const stringToComponentConfig = (str) => {
+  // Remove leading/trailing whitespace and newlines
+  str = str.trim();
+  
+  // Extract the component type
+  const typeMatch = str.match(/^<(\w+)/);
+  if (!typeMatch) return null;
+  const type = typeMatch[1];
 
+  // Extract props
+  const propsMatch = str.match(/(\w+)="([^"]*)"/g);
+  const props = {};
+  if (propsMatch) {
+    propsMatch.forEach(prop => {
+      const [key, value] = prop.split('=');
+      props[key] = value.replace(/"/g, '');
+    });
+  }
+
+  // Extract children
+  const childrenMatch = str.match(/>([^<]+)</);
+  if (childrenMatch) {
+    props.children = childrenMatch[1].trim();
+  }
+
+  // Handle nested components
+  const nestedComponentMatch = str.match(/>(.+)</s);
+  if (nestedComponentMatch && nestedComponentMatch[1].includes('<')) {
+    props.children = renderComponents(nestedComponentMatch[1].trim());
+  }
+
+  // Map string type to actual component
+  const componentMap = {
+    NodeButton,
+    ResizableComponent,
+    NodeCard,
+    NodeCardHeader,
+    NodeCardContent,
+    NodeCardDescription,
+    NodeCardTitle,
+    NodeCardFooter,
+    NodeCalendar,
+    div: 'div'
+  };
+
+  return {
+    type: componentMap[type] || type,
+    props
+  };
+};
 const componentMap = {
   NodeButton,
   ResizableComponent,
@@ -419,7 +469,7 @@ const App = () => {
 					<Viewport>
 						<Frame>
 							<Element is={Wrapper} canvas>
-								<Element is={DynamicContent}>Temporary</Element>
+								<Element is={DynamicContent}></Element>
 							</Element>
 						</Frame>
 					</Viewport>

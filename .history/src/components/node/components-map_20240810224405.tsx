@@ -343,7 +343,7 @@ export const componentsMap: Components[] = [
 						</AlertDescription>
 					</Alert>
 				),
-				node: <NodeAlert className="" />
+				node: <NodeAlert />
 			}
 		]
 	},
@@ -361,7 +361,7 @@ export const componentsMap: Components[] = [
 						/>
 					</AspectRatio>
 				),
-				node: <NodeAspectRatio>{null}</NodeAspectRatio>
+				node: <NodeAspectRatio />
 			}
 		]
 	},

@@ -343,7 +343,7 @@ export const componentsMap: Components[] = [
 						</AlertDescription>
 					</Alert>
 				),
-				node: <NodeAlert className="" />
+				node: <NodeAlert />
 			}
 		]
 	},
