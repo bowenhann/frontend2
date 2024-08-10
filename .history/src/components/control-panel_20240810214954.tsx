@@ -75,13 +75,12 @@ function renderComponents(componentString) {
       }
 
       const RenderedComponent = (nodeProps) => (
-        <Component {...props} {...nodeProps}>
-          {children}
-        </Component>
-      );
-      RenderedComponent.displayName = `Rendered${componentName}`;
-      return RenderedComponent;
-    }
+      <Component {...props} {...nodeProps}>
+        {children}
+      </Component>
+    );
+    RenderedComponent.displayName = `Rendered${componentName}`;
+    return RenderedComponent;
   }
 
   return () => null;

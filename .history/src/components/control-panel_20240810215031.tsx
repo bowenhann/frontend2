@@ -74,13 +74,11 @@ function renderComponents(componentString) {
         props[key] = objectValue ? JSON.parse(objectValue) : stringValue;
       }
 
-      const RenderedComponent = (nodeProps) => (
+      return (nodeProps) => (
         <Component {...props} {...nodeProps}>
           {children}
         </Component>
       );
-      RenderedComponent.displayName = `Rendered${componentName}`;
-      return RenderedComponent;
     }
   }
 
