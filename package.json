@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/backend": "^1.0.4",
     "@aws-amplify/cli": "^12.12.6",
     "@craftjs/core": "^0.2.10",
     "@epic-web/client-hints": "^1.2.2",
