@@ -15,6 +15,7 @@ import { NodeAccordion } from '@/components/node/accordion';
 import { NodeAvatar } from '@/components/node/avatar';
 import { NodeAlertDialog } from '@/components/node/alert-dialog';
 import { NodeAlert } from '@/components/node/alert';
+import { ResizablePanelLayout } from '@/components/resizablePanelLayout';
 import { DynamicContent } from '@/components/dynamicContent';
 
 const componentMap = {
@@ -29,6 +30,7 @@ const componentMap = {
   div: 'div',
   span: 'span',
   ResizableComponent,
+  ResizablePanelLaout,
   NodeAccordion,
   NodeAvatar,
   NodeAlertDialog,
