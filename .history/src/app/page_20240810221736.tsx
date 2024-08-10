@@ -91,17 +91,7 @@ interface NewContentProps {
   stage: number;
 }
 
-interface CraftComponent<T> extends React.FC<T> {
-  craft: {
-    displayName: string;
-    props: Partial<T>;
-    related: {
-      toolbar: () => React.ReactElement;
-    };
-  };
-}
-
-const NewContent: CraftComponent<NewContentProps> = ({ buttonStrings, stage }) => {
+const NewContent: React.FC<NewContentProps> = ({ buttonStrings, stage }) => {
   const { connectors: { connect, drag } } = useNode();
 
   const renderContent = () => {

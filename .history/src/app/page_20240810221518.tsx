@@ -91,17 +91,7 @@ interface NewContentProps {
   stage: number;
 }
 
-interface CraftComponent<T> extends React.FC<T> {
-  craft: {
-    displayName: string;
-    props: Partial<T>;
-    related: {
-      toolbar: () => React.ReactElement;
-    };
-  };
-}
-
-const NewContent: CraftComponent<NewContentProps> = ({ buttonStrings, stage }) => {
+const NewContent: React.FC<NewContentProps> = ({ buttonStrings, stage }) => {
   const { connectors: { connect, drag } } = useNode();
 
   const renderContent = () => {
@@ -109,25 +99,26 @@ const NewContent: CraftComponent<NewContentProps> = ({ buttonStrings, stage }) =
     const ButtonComponent = renderComponents(combinedString);
 		return (
       <Element 
-        id="dynamic_content_container" 
-        is={Container} 
-        canvas 
-        className={`dynamic-class-${stage}`}
-      >
-        {ButtonComponent}
-      </Element>
+      id="dynamic_content_container" 
+      is={Container} 
+      canvas 
+      className="" // Add an empty string as className
+    >
+      {ButtonComponent}
+    </Element>
+  );
     );
   };
 
 	return (<div>{renderContent()}</div>);
-  // return (
-  //   <div
-  //     ref={(ref) => connect(drag(ref))}
-  //     className="p-2 m-1 border border-dashed border-gray-300"
-  //   >
-  //     {renderContent()}
-  //   </div>
-  // );
+  return (
+    <div
+      ref={(ref) => connect(drag(ref))}
+      className="p-2 m-1 border border-dashed border-gray-300"
+    >
+      {renderContent()}
+    </div>
+  );
 };
 
 NewContent.craft = {

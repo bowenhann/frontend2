@@ -101,7 +101,7 @@ interface CraftComponent<T> extends React.FC<T> {
   };
 }
 
-const NewContent: CraftComponent<NewContentProps> = ({ buttonStrings, stage }) => {
+const NewContent: React.FC<NewContentProps> = ({ buttonStrings, stage }) => {
   const { connectors: { connect, drag } } = useNode();
 
   const renderContent = () => {

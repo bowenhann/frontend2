@@ -130,7 +130,7 @@ const NewContent: CraftComponent<NewContentProps> = ({ buttonStrings, stage }) =
   // );
 };
 
-NewContent.craft = {
+NewContent = {
   displayName: 'Dynamic Content Container',
   props: {
     buttonStrings: [],
