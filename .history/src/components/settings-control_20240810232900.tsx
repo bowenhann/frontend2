@@ -86,7 +86,7 @@ export const SettingsControl = () => {
 	const CustomOption = ({
 		children,
 		...props
-	}: any) => {
+	}: a) => {
 		// Remove the niceties for mouseover and mousemove to optimize for large lists
 		// eslint-disable-next-line no-unused-vars
 		const { onMouseMove, onMouseOver, ...rest } = props.innerProps

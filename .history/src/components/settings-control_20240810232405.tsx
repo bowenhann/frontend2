@@ -1,6 +1,6 @@
 import { useEditor, useNode } from '@craftjs/core'
 import { Component, ReactNode, useEffect, useState } from 'react'
-import Select, { OptionProps, MultiValue, components, createFilter } from 'react-select'
+import Select, { OptionProps.MultiValue, components, createFilter } from 'react-select'
 import { suggestions } from '@/lib/tw-classes'
 import {
 	Option,
@@ -86,7 +86,10 @@ export const SettingsControl = () => {
 	const CustomOption = ({
 		children,
 		...props
-	}: any) => {
+	}: {
+		children: React.ReactNode
+		innerProps: any
+	}) => {
 		// Remove the niceties for mouseover and mousemove to optimize for large lists
 		// eslint-disable-next-line no-unused-vars
 		const { onMouseMove, onMouseOver, ...rest } = props.innerProps
@@ -132,7 +135,7 @@ export const SettingsControl = () => {
 				options={selectOptions}
 				isSearchable
 				isClearable={false}
-				components={{ MenuList: MenuList as any, Option: CustomOption }}
+				components={{ MenuList, Option: CustomOption }}
 				isMulti
 				placeholder={'Add new class'}
 				value={value}
