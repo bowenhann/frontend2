@@ -16,7 +16,7 @@ export const NodeAlert = ({
   return (
     <Alert
       ref={(ref) => connect(drag(ref)) as any}
-      variant={variant as any}
+      variant={variant}
       className={cn(className)}
       {...props}
     >
