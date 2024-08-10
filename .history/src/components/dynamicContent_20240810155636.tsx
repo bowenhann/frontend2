@@ -1,4 +1,4 @@
-import { useNode } from '@craftjs/core'
+import 
 
 // DynamicContent component
 export const DynamicContent = ({ children }) => {
