@@ -3,7 +3,7 @@ import { Editor, Frame, Element } from '@craftjs/core';
 import { renderComponents } from '@/lib/componentRenderer';
 
 import { ResizableComponent } from '@/components/resizableComponent'
-import { ResizablePanelLayout } from '@/components/resizablePanelLayout'
+// import { ResizablePanelLayout } from '@/components/resizablePanelLayout'
 
 import { Canvas } from '@/components/canvas'
 import { NodeButton } from '@/components/node/button'
@@ -91,7 +91,7 @@ const StreamingComponentRenderer: React.FC<StreamingComponentRendererProps> = ({
 					NodeTwoBlocks,
 					NodeCalendar,
 					ResizableComponent,
-					ResizablePanelLayout,
+					// ResizablePanelLayout,
 					Element,
 					div: 'div',
 					span: 'span',
