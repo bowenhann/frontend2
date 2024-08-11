@@ -38,6 +38,7 @@ export const ResizableComponent = ({ width = 'auto', height = 'auto', children }
         verticalAlign: 'top', // Align tops of inline-block elements
         margin: '5px',
         maxWidth: '100%',
+        maxHeight: '100%',
       }}
     >
       {containerSize.width > 0 && containerSize.height > 0 && (
