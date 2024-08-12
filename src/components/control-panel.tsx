@@ -4,27 +4,32 @@ import { VariantCanvas } from '@/components/variantCanvas';
 import { NodeButton } from '@/components/node/button';
 import { NodeCard, NodeCardHeader, NodeCardContent, NodeCardFooter, NodeCardTitle, NodeCardDescription } from '@/components/node/card';
 import { NodeCalendar } from '@/components/node/calendar';
-// Import other components as needed
 import { renderComponents } from '@/lib/componentRenderer'
 import { componentMap, componentNameMap } from "@/lib/component-map";
 
 
 function getComponentName(type) {
   if (typeof type === 'string') {
+    console.log("-string", type)
     return type;
   }
   if (typeof type === 'function') {
+    console.log("-function", type.name)
     return componentNameMap[type.name] || type.name;
   }
   if (type && type.craft) {
-    const craftName = type.craft.name || type.craft.displayName;
+    let craftName = type.craft.name || type.craft.displayName;
+    craftName = craftName.replace(' ', '');
+    console.log("-either", type.craft.name, type.craft.displayName)
     return componentNameMap[craftName] || craftName || 'UnknownComponent';
   }
   return 'UnknownComponent';
 }
 
-function generateComponentString(type, props, children) {
+function generateComponentString(node, query) {
+  const { type, props, nodes } = node.data;
   const componentName = getComponentName(type);
+
   const propsString = Object.entries(props)
     .filter(([key, value]) => key !== 'children' && value !== undefined)
     .map(([key, value]) => {
@@ -35,8 +40,31 @@ function generateComponentString(type, props, children) {
     })
     .join(' ');
 
-  return `<${componentName}${propsString ? ' ' + propsString : ''}>${children || ''}</${componentName}>`;
+  let childrenString = '';
+  if (nodes && nodes.length > 0) {
+    childrenString = nodes.map(childId => {
+      const childNode = query.node(childId).get();
+      return generateComponentString(childNode, query);
+    }).join('');
+  } else if (props.children) {
+    if (typeof props.children === 'string') {
+      childrenString = props.children;
+    } else if (React.isValidElement(props.children)) {
+      childrenString = generateComponentString({ data: { type: props.children.type, props: props.children.props, nodes: [] } }, query);
+    } else if (Array.isArray(props.children)) {
+      childrenString = props.children.map(child => {
+        if (typeof child === 'string') return child;
+        if (React.isValidElement(child)) {
+          return generateComponentString({ data: { type: child.type, props: child.props, nodes: [] } }, query);
+        }
+        return '';
+      }).join('');
+    }
+  }
+
+  return `<${componentName}${propsString ? ' ' + propsString : ''}>${childrenString}</${componentName}>`;
 }
+
 
 function renderComponents1(componentString) {
   const regex = /<(\w+)([^>]*)>(.*?)<\/\1>/;
@@ -126,18 +154,18 @@ export const ControlPanel = () => {
     if (active && active !== 'ROOT') {
       const node = query.node(active).get();
       if (node) {
-        const { type, props } = node.data;
-        const baseProps = { ...props, className: props.className || '' };
-        const baseString = generateComponentString(type, baseProps, props.children || '');
+        const baseString = generateComponentString(node, query);
+        console.log("Base component string:", baseString);
         
         // Generate 5 variants with different background colors
         const newVariants = [
-          { string: baseString, props: baseProps },
+          { string: baseString, props: node.data.props },
           ...Array(5).fill(null).map(() => {
             const bgColorClass = generateRandomBgColor();
-            const variantProps = { ...props, className: `${props.className || ''} ${bgColorClass}`.trim() };
-            const variantString = generateComponentString(type, variantProps, props.children || '');
-            console.log("Variantstring", variantString)
+            const variantProps = { ...node.data.props, className: `${node.data.props.className || ''} ${bgColorClass}`.trim() };
+            const variantNode = { ...node, data: { ...node.data, props: variantProps } };
+            const variantString = generateComponentString(variantNode, query);
+            console.log("Variant string:", variantString);
             return { string: variantString, props: variantProps };
           })
         ];
@@ -171,9 +199,10 @@ export const ControlPanel = () => {
       
       try {
         // variantString =  `<NodeButton>Test</NodeButton>`
+
         const parsedComponents = renderComponents(variantString);
 
-        console.log(variantString)
+        console.log("~~", variantString)
         
         const processComponent = (component) => {
           const craftElement = createCraftElement(component);

@@ -14,7 +14,7 @@ export const componentStrings = [
           <NodeCardTitle className="text-2xl font-bold text-white">Complex Component Demo</NodeCardTitle>
           <NodeCardDescription className="text-sm text-blue-100">Showcasing various nested components</NodeCardDescription>
         </div>
-      </NodeCardHeader>
+      </NodeCardHeader>c
     </NodeCard>
   </ResizableComponent>
   `,
@@ -106,7 +106,7 @@ export const componentStrings = [
   // Footer
   `
   <ResizableComponent width="100%" height="20%" className="bg-gradient-to-br from-gray-100 to-gray-200">
-    <NodeCard className="h-full bg-white rounded-lg shadow-lg overflow-hidden">
+    <NodeCard className="h-full bg-blue-500 rounded-lg shadow-lg overflow-hidden">
       <NodeCardFooter className="h-full p-4 flex justify-between items-center">
         <NodeHoverCard>
           <NodeHoverCard.Trigger>

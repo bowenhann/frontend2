@@ -1,4 +1,3 @@
-import React from 'react'
 import { Element } from '@craftjs/core'
 import { ResizableComponent } from '@/components/resizableComponent'
 import { NodeButton } from '@/components/node/button'
@@ -30,6 +29,20 @@ import { NodeCommand } from '@/components/node/command'
 import { NodeDialog } from '@/components/node/dialog'
 import { NodeInput } from '@/components/node/input'
 import { NodeHoverCard } from '@/components/node/hover-card'
+import { NodeMenubar,
+  NodeMenubarMenu,
+  NodeMenubarTrigger,
+  NodeMenubarContent,
+  NodeMenubarItem,
+  NodeMenubarSeparator,
+  NodeMenubarShortcut,
+  NodeMenubarSub,
+  NodeMenubarSubContent,
+  NodeMenubarSubTrigger,
+  NodeMenubarCheckboxItem,
+  NodeMenubarRadioGroup,
+  NodeMenubarRadioItem,
+   } from '@/components/node/menubar';
 
 export const componentMap = {
 	Element,
@@ -60,6 +73,19 @@ export const componentMap = {
 	NodeDialog,
 	NodeInput,
 	NodeHoverCard,
+  NodeMenubar,
+  NodeMenubarMenu,
+  NodeMenubarTrigger,
+  NodeMenubarContent,
+  NodeMenubarItem,
+  NodeMenubarSeparator,
+  NodeMenubarShortcut,
+  NodeMenubarSub,
+  NodeMenubarSubContent,
+  NodeMenubarSubTrigger,
+  NodeMenubarCheckboxItem,
+  NodeMenubarRadioGroup,
+  NodeMenubarRadioItem,
 	DynamicContent
 }
 
@@ -85,5 +111,19 @@ export const componentNameMap = {
 	Command: 'NodeCommand',
 	ContextMenu: 'NodeContextMenu',
 	Dialog: 'NodeDialog',
-	HoverCard: 'NodeHoverCard'
+	HoverCard: 'NodeHoverCard',
+  Input: 'NodeInput',
+  Menubar: 'NodeMenubar',
+  MenubarMenu: 'NodeMenubarMenu',
+  MenubarTrigger: 'NodeMenubarTrigger',
+  MenubarContent: 'NodeMenubarContent',
+  MenubarItem: 'NodeMenubarItem',
+  MenubarSeparator: 'NodeMenubarSeparator',
+  MenubarShortcut: 'NodeMenubarShortcut',
+  MenubarSub: 'NodeMenubarSub',
+  MenubarSubContent: 'NodeMenubarSubContent',
+  MenubarSubTrigger: 'NodeMenubarSubTrigger',
+  MenubarCheckboxItem: 'NodeMenubarCheckboxItem',
+  MenubarRadioGroup: 'NodeMenubarRadioGroup',
+  MenubarRadioItem: 'NodeMenubarRadioItem',
 }

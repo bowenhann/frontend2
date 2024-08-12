@@ -20,7 +20,12 @@ import { OneBlock, NodeOneBlock, NodeTwoBlocks } from '@/components/node/layout'
 import { NodeButton } from './button'
 import { NodeCard } from './card'
 import { NodeCalendar } from './calendar' // 导入 NodeCalendar 组件
-import { NodeAccordion, NodeAccordionItem, NodeAccordionTrigger, NodeAccordionContent } from './accordion'
+import {
+	NodeAccordion,
+	NodeAccordionItem,
+	NodeAccordionTrigger,
+	NodeAccordionContent
+} from './accordion'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { NodeAvatar } from './avatar'
 import { NodeAlertDialog } from '@/components/node/alert-dialog'
@@ -77,13 +82,51 @@ import {
 	DialogFooter
 } from '../ui/dialog'
 import { NodeDialog } from './dialog'
-import { NodeHoverCard } from '@/components/node/hover-card';
-import { HoverCardSettings } from '@/components/settings/hover-card';
-import { NodeInput } from '@/components/node/input';
-import { InputSettings } from '@/components/settings/input';
-import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card'
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
+import { NodeHoverCard } from '@/components/node/hover-card'
+import { HoverCardSettings } from '@/components/settings/hover-card'
+import { NodeInput } from '@/components/node/input'
+import { InputSettings } from '@/components/settings/input'
+import {
+	HoverCard,
+	HoverCardTrigger,
+	HoverCardContent
+} from '@/components/ui/hover-card'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { NodeLabel } from '@/components/node/label'
+import {
+	NodeMenubar,
+	NodeMenubarMenu,
+	NodeMenubarTrigger,
+	NodeMenubarContent,
+	NodeMenubarItem,
+	NodeMenubarSeparator,
+	NodeMenubarShortcut,
+	NodeMenubarSub,
+	NodeMenubarSubContent,
+	NodeMenubarSubTrigger,
+	NodeMenubarCheckboxItem,
+	NodeMenubarRadioGroup,
+	NodeMenubarRadioItem,
+} from '@/components/node/menubar'
+import {
+	Menubar,
+	MenubarMenu,
+	MenubarTrigger,
+	MenubarContent,
+	MenubarSeparator,
+	MenubarCheckboxItem,
+	MenubarGroup,
+	MenubarItem,
+	MenubarLabel,
+	MenubarPortal,
+	MenubarRadioGroup,
+	MenubarRadioItem,
+	MenubarShortcut,
+	MenubarSub,
+	MenubarSubContent,
+	MenubarSubTrigger
+} from '@/components/ui/menubar'
 
 export type Components = {
 	name: string
@@ -261,19 +304,22 @@ export const componentsMap: Components[] = [
 				),
 				node: (
 					<NodeAccordion type="single" collapsible className="h-full">
-  <NodeAccordionItem value="item-1" className="h-full">
-    <NodeAccordionTrigger>Interactive Elements</NodeAccordionTrigger>
-    <NodeAccordionContent>
-      <div className="space-y-4 h-full flex flex-col justify-center">
-        <NodeButton className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-md hover:from-green-500 hover:to-blue-600 transition-all duration-300">
-          Gradient Button
-        </NodeButton>
-        <NodeCheckbox label="Check me!" className="text-indigo-600" />
-        <NodeInput placeholder="Type something..." className="border-2 border-gray-300 rounded-md p-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
-      </div>
-    </NodeAccordionContent>
-  </NodeAccordionItem>
-</NodeAccordion>
+						<NodeAccordionItem value="item-1" className="h-full">
+							<NodeAccordionTrigger>Interactive Elements</NodeAccordionTrigger>
+							<NodeAccordionContent>
+								<div className="space-y-4 h-full flex flex-col justify-center">
+									<NodeButton className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-md hover:from-green-500 hover:to-blue-600 transition-all duration-300">
+										Gradient Button
+									</NodeButton>
+									<NodeCheckbox label="Check me!" className="text-indigo-600" />
+									<NodeInput
+										placeholder="Type something..."
+										className="border-2 border-gray-300 rounded-md p-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+									/>
+								</div>
+							</NodeAccordionContent>
+						</NodeAccordionItem>
+					</NodeAccordion>
 				)
 			}
 		]
@@ -479,45 +525,99 @@ export const componentsMap: Components[] = [
 			}
 		]
 	},
-  {
-    name: 'Overlay',
-    items: [
-      // ... (existing overlay components)
-      {
-        name: 'Hover Card',
-        demo: (
-          <HoverCard>
-            <HoverCardTrigger asChild>
-              <Button variant="link">Hover me</Button>
-            </HoverCardTrigger>
-            <HoverCardContent className="w-80">
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold">@nextjs</h4>
-                <p className="text-sm">
-                  The React Framework – created and maintained by @vercel.
-                </p>
-              </div>
-            </HoverCardContent>
-          </HoverCard>
-        ),
-        node: <NodeHoverCard />,
-      },
-    ],
-  },
-  {
-    name: 'Forms',
-    items: [
-      // ... (existing form components)
-      {
-        name: 'Input',
-        demo: (
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" />
-          </div>
-        ),
-        node: <NodeInput />,
-      },
-    ],
-  },
+	{
+		name: 'Overlay',
+		items: [
+			// ... (existing overlay components)
+			{
+				name: 'Hover Card',
+				demo: (
+					<HoverCard>
+						<HoverCardTrigger asChild>
+							<Button variant="link">Hover me</Button>
+						</HoverCardTrigger>
+						<HoverCardContent className="w-80">
+							<div className="space-y-2">
+								<h4 className="text-sm font-semibold">@nextjs</h4>
+								<p className="text-sm">
+									The React Framework – created and maintained by @vercel.
+								</p>
+							</div>
+						</HoverCardContent>
+					</HoverCard>
+				),
+				node: <NodeHoverCard />
+			}
+		]
+	},
+	{
+		name: 'Forms',
+		items: [
+			// ... (existing form components)
+			{
+				name: 'Input',
+				demo: (
+					<div className="space-y-2">
+						<Label htmlFor="email">Email</Label>
+						<Input id="email" type="email" placeholder="m@example.com" />
+					</div>
+				),
+				node: <NodeInput />
+			}
+		]
+	},
+	// {
+	//   name: 'Forms',
+	//   items: [
+	//     // ... (existing form components)
+	//     {
+	//       name: 'Label',
+	//       demo: <Label htmlFor="email">Email</Label>,
+	//       node: <NodeLabel>Label</NodeLabel>,
+	//     },
+	//   ],
+	// },
+	{
+		name: 'Navigation',
+		items: [
+			// ... (existing navigation components)
+			{
+				name: 'Menubar',
+				demo: (
+					<Menubar>
+						<MenubarMenu>
+							<MenubarTrigger>File</MenubarTrigger>
+							<MenubarContent>
+								<MenubarItem>
+									New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+								</MenubarItem>
+								<MenubarItem>New Window</MenubarItem>
+								<MenubarSeparator />
+								<MenubarItem>Share</MenubarItem>
+								<MenubarSeparator />
+								<MenubarItem>Print</MenubarItem>
+							</MenubarContent>
+						</MenubarMenu>
+					</Menubar>
+				),
+				node: (
+					<NodeMenubar>
+						<NodeMenubarMenu>
+							<NodeMenubarTrigger>File</NodeMenubarTrigger>
+							<NodeMenubarContent>
+								<NodeMenubarItem>
+									New Tab <NodeMenubarShortcut>⌘T</NodeMenubarShortcut>
+								</NodeMenubarItem>
+								<NodeMenubarItem>New Window</NodeMenubarItem>
+								<NodeMenubarSeparator />
+								<NodeMenubarItem>Share</NodeMenubarItem>
+								<NodeMenubarSeparator />
+								<NodeMenubarItem>Print</NodeMenubarItem>
+							</NodeMenubarContent>
+						</NodeMenubarMenu>
+					</NodeMenubar>
+				)
+			}
+		]
+	}
 ]

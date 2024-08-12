@@ -13,6 +13,10 @@ import { Input } from '@/components/ui/input'
 import { AvatarSettings } from '@/components/settings/avatar'
 import { AccordionSettings } from '@/components/settings/accordion'
 import { AlertDialogSettings } from '@/components/settings/alert-dialog'
+import { AspectRatioSettings } from '@/components/settings/aspect-ratio'
+import { CollapsibleSettings } from '@/components/settings/collapsible'
+import { CheckboxSettings } from '@/components/settings/checkbox'
+import { MenubarSettings } from '@/components/settings/menubar'
 
 const selectOptions = suggestions.map((value) => ({ label: value, value }))
 
@@ -157,6 +161,10 @@ export const SettingsControl = () => {
 			{nodeName === 'Avatar' && <AvatarSettings />}
 			{nodeName === 'Accordion' && <AccordionSettings />}
       {nodeName === 'AlertDialog' && <AlertDialogSettings />}
+			{nodeName === 'AspectRatio' && <AspectRatioSettings />}
+			{nodeName === 'Collapsible' && <CollapsibleSettings />}
+			{nodeName === 'Checkbox' && <CheckboxSettings />}
+			{nodeName === 'Menubar' && <MenubarSettings />}
 
 		</div>
 	)

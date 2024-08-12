@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState, useCallback, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Editor, Frame, Element, useEditor, useNode } from '@craftjs/core'
 import { renderComponents } from '@/lib/componentRenderer'
 import { Canvas } from '@/components/canvas'
