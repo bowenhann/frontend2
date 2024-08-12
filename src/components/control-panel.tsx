@@ -3,20 +3,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { VariantCanvas } from '@/components/variantCanvas';
 import { NodeButton } from '@/components/node/button';
 import { NodeCard, NodeCardHeader, NodeCardContent, NodeCardFooter, NodeCardTitle, NodeCardDescription } from '@/components/node/card';
+import { NodeCalendar } from '@/components/node/calendar';
 // Import other components as needed
 import { renderComponents } from '@/lib/componentRenderer'
-
-const componentMap = {
-  Element,
-  NodeButton,
-  NodeCard,
-  NodeCardHeader,
-  NodeCardContent,
-  NodeCardFooter,
-  NodeCardTitle,
-  NodeCardDescription
-  // Add other components to the map as needed
-};
+import { componentMap } from "@/lib/component-map";
 
 const componentNameMap = {
   NodeButton: 'Button',
@@ -224,13 +214,15 @@ export const ControlPanel = () => {
     }
   };
 
+
   return (
     <div className="w-80 border-l h-auto overflow-auto">
       {active && active !== 'ROOT' && (
         <div className="p-4">
           <h4 className="text-sm font-semibold mt-4 mb-2">Variants:</h4>
           {variants.map((variant, index) => {
-            const VariantComponent = renderComponents1(variant.string);
+            const VariantComponent = renderComponents(variant.string);
+        
             return (
               <div key={`${editorKey}-${index}`} className="mb-4 border p-2 rounded">
                 <div className="mb-2" style={{ height: '100px' }}>
@@ -238,11 +230,11 @@ export const ControlPanel = () => {
                     key={`${editorKey}-${index}`}
                     resolver={{
                       ...componentMap,
-                      VariantComponent
                     }}
                   >
                     <VariantCanvas>
-                      <VariantComponent />
+                      {/* <VariantComponent /> */}
+                      {VariantComponent}
                     </VariantCanvas>
                   </Editor>
                 </div>
