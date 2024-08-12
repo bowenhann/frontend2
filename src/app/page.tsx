@@ -34,7 +34,7 @@ import { NodeAlertDialog } from '@/components/node/alert-dialog'
 import { NodeHoverCard } from '@/components/node/hover-card'
 import { NodeInput } from '@/components/node/input'
 import { DynamicContent } from '@/components/dynamicContent';
-
+import { componentMap } from '@/lib/component-map'
 
 // Updated NewContent component
 
@@ -208,12 +208,7 @@ const safeStringify = (obj, indent = 2) => {
 
 
 
-const componentMap = {
-  NodeButton,
-  ResizableComponent,
-  NodeCalendar,
-  // Add other components here
-};
+
 
 const createCraftElement = (component) => {
   if (typeof component !== 'object' || component === null) {
@@ -282,7 +277,7 @@ const ContentUpdater = () => {
                     Gradient Button
                   </NodeButton>
                   <NodeCheckbox label="Check me!" className="text-indigo-600" />
-                  <NodeInput placeholder="Type something..." className="border-2 border-gray-300 rounded-md p-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+      <Input id="input" type={type} placeholder={placeholder} {...props} />
                 </div>
               </NodeAccordion.Content>
             </NodeAccordion.Item>
@@ -445,42 +440,14 @@ const App = () => {
 			{/* <h1 className="text-2xl font-bold mb-4">Dynamic Button Rendering Demo</h1> */}
 			<Editor
 				resolver={{
+          ...componentMap,
 					DynamicContent,
 					TextBox,
 					Container,
 					NewContent,
-					NodeButton,
 					Canvas,
 					ResizableComponent,
-					NodeCardHeader,
-					NodeCard,
-					NodeCardContent,
-					NodeCardDescription,
-					NodeCardTitle,
-					NodeCardFooter,
 					Wrapper,
-					Element,
-					div: 'div',
-					span: 'span',
-					NodeAccordion,
-          NodeAccordionTrigger,
-          NodeAccordionItem,
-          NodeAccordionContent,
-					NodeAvatar,
-					// NodeAlertDialog,
-					NodeAlert,
-					NodeAspectRatio,
-					NodeBadge,
-					NodeCheckbox,
-					NodeCollapsible,
-					NodeCommand,
-					NodeContextMenu,
-					NodeDialog,
-					NodeCalendar,
-					NodeAlertDialog,
-					NodeHoverCard,
-					NodeInput
-					// LoadingComponent,
 				}}
 			>
 				<div className="flex flex-1 relative overflow-hidden">

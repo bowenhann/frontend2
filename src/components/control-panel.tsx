@@ -6,18 +6,8 @@ import { NodeCard, NodeCardHeader, NodeCardContent, NodeCardFooter, NodeCardTitl
 import { NodeCalendar } from '@/components/node/calendar';
 // Import other components as needed
 import { renderComponents } from '@/lib/componentRenderer'
-import { componentMap } from "@/lib/component-map";
+import { componentMap, componentNameMap } from "@/lib/component-map";
 
-const componentNameMap = {
-  Button: 'NodeButton',
-  Card: 'NodeCard',
-  CardHeader: 'NodeCardHeader',
-  CardContent: 'NodeCardContent',
-  CardFooter: 'NodeCardFooter',
-  CardTitle: 'NodeCardTitle',
-  CardDescription: 'NodeCardDescription'
-  // Add mappings for other components as needed
-};
 
 function getComponentName(type) {
   if (typeof type === 'string') {
