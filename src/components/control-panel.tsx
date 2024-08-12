@@ -1,11 +1,13 @@
-import { useEditor, Editor } from "@craftjs/core";
+import { useEditor, Editor, Element } from "@craftjs/core";
 import React, { useEffect, useState, useRef } from "react";
 import { VariantCanvas } from '@/components/variantCanvas';
 import { NodeButton } from '@/components/node/button';
 import { NodeCard, NodeCardHeader, NodeCardContent, NodeCardFooter, NodeCardTitle, NodeCardDescription } from '@/components/node/card';
 // Import other components as needed
+import { renderComponents } from '@/lib/componentRenderer'
 
 const componentMap = {
+  Element,
   NodeButton,
   NodeCard,
   NodeCardHeader,
@@ -56,7 +58,7 @@ function generateComponentString(type, props, children) {
   return `<${componentName}${propsString ? ' ' + propsString : ''}>${children || ''}</${componentName}>`;
 }
 
-function renderComponents(componentString) {
+function renderComponents1(componentString) {
   const regex = /<(\w+)([^>]*)>(.*?)<\/\1>/;
   const match = regex.exec(componentString);
 
@@ -99,8 +101,39 @@ function generateRandomBgColor() {
   return `bg-${randomColor}-${randomShade}`;
 }
 
+const UnrelatedButton = () => (
+  <NodeButton>Test1</NodeButton>
+);
+const createCraftElement = (component) => {
+  if (typeof component !== 'object' || component === null) {
+    return component;
+  }
+
+  const { type, props } = component;
+  const Component = componentMap[type] || type;
+
+  if (!Component) {
+    console.error(`Component type "${type}" not found in componentMap`);
+    return null;
+  }
+
+  const craftProps = { ...props };
+
+  if (props && props.children) {
+    craftProps.children = Array.isArray(props.children)
+      ? props.children.map(createCraftElement)
+      : createCraftElement(props.children);
+  }
+
+  return (
+    <Element canvas is={Component} {...craftProps}>
+      {craftProps.children}
+    </Element>
+  );
+};
+
 export const ControlPanel = () => {
-  const { active, related, query } = useEditor((state, query) => ({
+  const { active, related, query, actions } = useEditor((state, query) => ({
     active: query.getEvent('selected').first(),
     related: state.nodes[query.getEvent('selected').first()]?.related
   }));
@@ -119,12 +152,12 @@ export const ControlPanel = () => {
         
         // Generate 5 variants with different background colors
         const newVariants = [
-          { string: baseString, className: baseProps.className },
+          { string: baseString, props: baseProps },
           ...Array(5).fill(null).map(() => {
             const bgColorClass = generateRandomBgColor();
             const variantProps = { ...props, className: `${props.className || ''} ${bgColorClass}`.trim() };
             const variantString = generateComponentString(type, variantProps, props.children || '');
-            return { string: variantString, className: variantProps.className };
+            return { string: variantString, props: variantProps };
           })
         ];
 
@@ -141,16 +174,63 @@ export const ControlPanel = () => {
     }
   }, [active, query]);
 
+  const handleReplace = (variantProps) => {
+    if (active && active !== 'ROOT') {
+      actions.setProp(active, (props) => {
+        Object.assign(props, variantProps);
+      });
+    }
+  };
+
+  const handleFullReplace = (variantString) => {
+    if (active && active !== 'ROOT') {
+      const node = query.node(active).get();
+      const parentId = node.data.parent;
+      const currentIndex = query.node(parentId).get().data.nodes.indexOf(active);
+      
+      try {
+        // variantString =  `<NodeButton>Test</NodeButton>`
+        const parsedComponents = renderComponents(variantString);
+
+        console.log(variantString)
+        
+        const processComponent = (component) => {
+          const craftElement = createCraftElement(component);
+
+          if (craftElement) {
+            console.log("craftElement", craftElement)
+            const nodeTree = query.parseReactElement(craftElement).toNodeTree();
+            actions.addNodeTree(nodeTree, parentId, currentIndex);
+            console.log("nodeTree", nodeTree)
+            
+          }
+        };
+
+        console.log('Parsed components:', parsedComponents);
+
+        if (Array.isArray(parsedComponents)) {
+          console.log("!")
+          parsedComponents.forEach(processComponent);
+        } else {
+          console.log("!!")
+          processComponent(parsedComponents);
+        }
+
+        // Delete the old node
+        actions.delete(active);
+      } catch (error) {
+        console.error('Error updating content:', error);
+      }
+    }
+  };
+
   return (
     <div className="w-80 border-l h-auto overflow-auto">
-      {/* <h3 className="py-2 px-4 border-b text-md font-semibold text-left">
-        Control Panel
-      </h3> */}
       {active && active !== 'ROOT' && (
         <div className="p-4">
           <h4 className="text-sm font-semibold mt-4 mb-2">Variants:</h4>
           {variants.map((variant, index) => {
-            const VariantComponent = renderComponents(variant.string);
+            const VariantComponent = renderComponents1(variant.string);
             return (
               <div key={`${editorKey}-${index}`} className="mb-4 border p-2 rounded">
                 <div className="mb-2" style={{ height: '100px' }}>
@@ -169,10 +249,44 @@ export const ControlPanel = () => {
                 <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto mb-2">
                   <code>{variant.string}</code>
                 </pre>
-                <p className="text-xs text-gray-600">Class: {variant.className}</p>
+                <p className="text-xs text-gray-600 mb-2">Class: {variant.props.className}</p>
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                  onClick={() => handleReplace(variant.props)}
+                >
+                  Replace Props
+                </button>
+                <button
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => handleFullReplace(variant.string)}
+                >
+                  Full Replace
+                </button>
               </div>
             );
           })}
+          
+          <h4 className="text-sm font-semibold mt-6 mb-2">Unrelated Component:</h4>
+          <div className="mb-4 border p-2 rounded">
+            <div className="mb-2" style={{ height: '100px' }}>
+              <Editor
+                resolver={{
+                  ...componentMap,
+                  UnrelatedButton
+                }}
+              >
+                <VariantCanvas>
+                  <UnrelatedButton />
+                </VariantCanvas>
+              </Editor>
+            </div>
+            <button
+              className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => handleFullReplace(UnrelatedButton)}
+            >
+              Replace with Unrelated Button
+            </button>
+          </div>
         </div>
       )}
       {active && related?.toolbar && React.createElement(related.toolbar)}

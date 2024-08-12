@@ -20,7 +20,7 @@ import { OneBlock, NodeOneBlock, NodeTwoBlocks } from '@/components/node/layout'
 import { NodeButton } from './button'
 import { NodeCard } from './card'
 import { NodeCalendar } from './calendar' // 导入 NodeCalendar 组件
-import { NodeAccordion } from './accordion'
+import { NodeAccordion, NodeAccordionItem, NodeAccordionTrigger, NodeAccordionContent } from './accordion'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { NodeAvatar } from './avatar'
 import { NodeAlertDialog } from '@/components/node/alert-dialog'
@@ -260,19 +260,20 @@ export const componentsMap: Components[] = [
 					</Accordion>
 				),
 				node: (
-					<Element
-						is={NodeAccordion}
-						canvas
-						type="multiple"
-						className="w-full max-w-md mx-auto"
-						items={[
-							{
-								triggerText: 'Is it accessible?',
-								contentText: 'Yes. It adheres to the WAI-ARIA design pattern.',
-								className: 'border-b'
-							}
-						]}
-					/>
+					<NodeAccordion type="single" collapsible className="h-full">
+  <NodeAccordionItem value="item-1" className="h-full">
+    <NodeAccordionTrigger>Interactive Elements</NodeAccordionTrigger>
+    <NodeAccordionContent>
+      <div className="space-y-4 h-full flex flex-col justify-center">
+        <NodeButton className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-md hover:from-green-500 hover:to-blue-600 transition-all duration-300">
+          Gradient Button
+        </NodeButton>
+        <NodeCheckbox label="Check me!" className="text-indigo-600" />
+        <NodeInput placeholder="Type something..." className="border-2 border-gray-300 rounded-md p-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+      </div>
+    </NodeAccordionContent>
+  </NodeAccordionItem>
+</NodeAccordion>
 				)
 			}
 		]
