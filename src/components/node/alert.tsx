@@ -1,32 +1,48 @@
 import React from 'react';
 import { useNode } from '@craftjs/core';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { AlertSettings } from '@/components/settings/alert';
-import { cn } from '@/lib/utils';
 
-export const NodeAlert = ({
+const createDraggableComponent = (Component: React.ComponentType<any>, isDroppable = false) => {
+  const DraggableComponent = React.forwardRef((props: any, ref: React.Ref<HTMLElement>) => {
+    const { connectors: { connect, drag } } = useNode();
+    const elementRef = React.useRef<HTMLElement>(null);
+
+    React.useImperativeHandle(ref, () => elementRef.current!);
+
+    React.useEffect(() => {
+      if (elementRef.current) {
+        connect(isDroppable ? drag(elementRef.current) : elementRef.current);
+      }
+    }, [connect, drag, isDroppable]);
+
+    return <Component ref={elementRef} {...props} />;
+  });
+
+  const originalName = Component.displayName || Component.name || 'Component';
+  DraggableComponent.displayName = `Draggable${originalName}`;
+
+  return DraggableComponent;
+};
+
+export const NodeAlert = createDraggableComponent(Alert, true);
+export const NodeAlertTitle = createDraggableComponent(AlertTitle);
+export const NodeAlertDescription = createDraggableComponent(AlertDescription);
+
+export const NodeAlertComponent = ({
   title = 'Alert Title',
   description = 'Alert Description',
   variant = 'default',
-  className,
   ...props
 }) => {
-  const { connectors: { connect, drag } } = useNode();
-
   return (
-    <Alert
-      ref={(ref) => connect(drag(ref)) as any}
-      variant={variant as any}
-      className={cn(className)}
-      {...props}
-    >
-      <AlertTitle>{title}</AlertTitle>
-      <AlertDescription>{description}</AlertDescription>
-    </Alert>
+    <NodeAlert variant={variant} {...props}>
+      <NodeAlertTitle>{title}</NodeAlertTitle>
+      <NodeAlertDescription>{description}</NodeAlertDescription>
+    </NodeAlert>
   );
 };
 
-NodeAlert.craft = {
+NodeAlertComponent.craft = {
   displayName: 'Alert',
   props: {
     title: 'Alert Title',
@@ -34,6 +50,6 @@ NodeAlert.craft = {
     variant: 'default',
   },
   related: {
-    toolbar: AlertSettings,
+    toolbar: () => { /* ... */ },
   },
 };

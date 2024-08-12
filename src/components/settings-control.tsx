@@ -17,6 +17,7 @@ import { AspectRatioSettings } from '@/components/settings/aspect-ratio'
 import { CollapsibleSettings } from '@/components/settings/collapsible'
 import { CheckboxSettings } from '@/components/settings/checkbox'
 import { MenubarSettings } from '@/components/settings/menubar'
+import { CardSettings } from '@/components/settings/card'
 
 const selectOptions = suggestions.map((value) => ({ label: value, value }))
 
@@ -165,6 +166,8 @@ export const SettingsControl = () => {
 			{nodeName === 'Collapsible' && <CollapsibleSettings />}
 			{nodeName === 'Checkbox' && <CheckboxSettings />}
 			{nodeName === 'Menubar' && <MenubarSettings />}
+			{nodeName === 'Card' && <CardSettings />}
+
 
 		</div>
 	)

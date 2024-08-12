@@ -1,3 +1,4 @@
+// @/components/node/card.tsx
 import React from 'react';
 import { useNode, Element } from '@craftjs/core';
 import {
@@ -8,48 +9,17 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { SettingsControl } from '@/components/settings-control';
-import { NodeButton } from './button'; // 假设按钮组件在同一目录
+import { createDraggableComponent } from '@/components/create-draggable-component';
+import { CraftComponent, CraftNodeProps } from '@/types/craft';
 
-interface CraftComponentProps {
-  displayName: string;
-  props: Record<string, any>;
-  related: {
-    toolbar: React.ComponentType<any>;
-  };
-  custom?: Record<string, any>;
+interface NodeCardProps extends CraftNodeProps, React.ComponentProps<typeof NodeCardContainer> {
+  title?: string;
+  description?: string;
+  content?: string;
+  footerButtonText?: string;
 }
-
-type CraftComponent<P = {}> = React.FC<P> & {
-  craft: CraftComponentProps;
-};
-
-interface NodeCardProps extends React.ComponentProps<typeof NodeCardContainer> {
-  children?: React.ReactNode;
-}
-
-
-const createDraggableComponent = (Component: React.ComponentType<any>, isDroppable = false) => {
-  const DraggableComponent = React.forwardRef((props: any, ref: React.Ref<HTMLElement>) => {
-    const { connectors: { connect, drag } } = useNode();
-    const elementRef = React.useRef<HTMLElement>(null);
-
-    React.useImperativeHandle(ref, () => elementRef.current!);
-
-    React.useEffect(() => {
-      if (elementRef.current) {
-        connect(isDroppable ? drag(elementRef.current) : elementRef.current);
-      }
-    }, [connect, drag, isDroppable]);
-
-    return <Component ref={elementRef} {...props} />;
-  });
-
-  const originalName = Component.displayName || Component.name || 'Component';
-  DraggableComponent.displayName = `Draggable${originalName}`;
-
-  return DraggableComponent;
-};
 
 export const NodeCardContainer = createDraggableComponent(Card, true);
 export const NodeCardHeader = createDraggableComponent(CardHeader, true);
@@ -58,47 +28,41 @@ export const NodeCardContent = createDraggableComponent(CardContent, true);
 export const NodeCardTitle = createDraggableComponent(CardTitle);
 export const NodeCardDescription = createDraggableComponent(CardDescription);
 
-export const NodeCard: CraftComponent<NodeCardProps> = (props) => {
+export const NodeCard: CraftComponent<NodeCardProps> = ({
+  children,
+  title = 'Card Title',
+  description = 'Card Description',
+  content = 'Empty Container',
+  footerButtonText = 'Footer button',
+  className = 'w-full',
+  ...props
+}) => {
   const { connectors: { connect, drag } } = useNode();
   
   const defaultContent = (
     <>
-      <Element
-        canvas
-        id="card-header"
-        is={NodeCardHeader}
-      >
-        <NodeCardTitle>Card Title</NodeCardTitle>
-        <NodeCardDescription>Card Description</NodeCardDescription>
-      </Element>
-      <Element
-        canvas
-        id="card-content"
-        is={NodeCardContent}
-      >
-        {/* 默认内容可以为空，或者添加一些占位文本 */}
-      </Element>
-      <Element
-        canvas
-        id="card-footer"
-        is={NodeCardFooter}
-      >
-        <NodeButton>Footer button</NodeButton>
-      </Element>
+      <NodeCardHeader>
+        <NodeCardTitle>{title}</NodeCardTitle>
+        <NodeCardDescription>{description}</NodeCardDescription>
+      </NodeCardHeader>
+      <NodeCardContent>{content}</NodeCardContent>
+      <NodeCardFooter>
+        <Button className="w-full">{footerButtonText}</Button>
+      </NodeCardFooter>
     </>
   );
 
   return (
     <NodeCardContainer
-    
       ref={(ref: HTMLElement | null) => {
         if (ref) {
           connect(drag(ref));
         }
       }}
+      className={className}
       {...props}
     >
-      {props.children || defaultContent}
+      {children || defaultContent}
     </NodeCardContainer>
   );
 };
@@ -124,6 +88,10 @@ NodeCard.craft = {
   ...NodeCard.craft,
   props: {
     className: 'p-6 m-2',
+    title: 'Card Title',
+    description: 'Card Description',
+    content: 'Empty Container',
+    footerButtonText: 'Footer button',
   },
   custom: {
     importPath: '@/components/card',

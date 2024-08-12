@@ -18,7 +18,14 @@ import {
 
 import { OneBlock, NodeOneBlock, NodeTwoBlocks } from '@/components/node/layout'
 import { NodeButton } from './button'
-import { NodeCard } from './card'
+import {
+	NodeCard,
+	NodeCardHeader,
+	NodeCardTitle,
+	NodeCardDescription,
+	NodeCardContent,
+	NodeCardFooter
+} from './card'
 import { NodeCalendar } from './calendar' // 导入 NodeCalendar 组件
 import {
 	NodeAccordion,
@@ -107,7 +114,7 @@ import {
 	NodeMenubarSubTrigger,
 	NodeMenubarCheckboxItem,
 	NodeMenubarRadioGroup,
-	NodeMenubarRadioItem,
+	NodeMenubarRadioItem
 } from '@/components/node/menubar'
 import {
 	Menubar,
@@ -190,7 +197,41 @@ export const componentsMap: Components[] = [
 						</CardFooter>
 					</Card>
 				),
-				node: <NodeCard></NodeCard>
+				node: (
+					<NodeCard className="w-full">
+						<NodeCardHeader>
+							<NodeCardTitle>Card Title</NodeCardTitle>
+							<NodeCardDescription>Card Description</NodeCardDescription>
+						</NodeCardHeader>
+						<NodeCardContent></NodeCardContent>
+						<NodeCardFooter>
+							<NodeButton className="w-full">Footer button</NodeButton>
+						</NodeCardFooter>
+					</NodeCard>
+				)
+			},
+			{
+				name: 'Default',
+				demo: (
+					<Card className="w-full">
+						<CardHeader>
+							<CardTitle>Card Title</CardTitle>
+							<CardDescription>Card Description</CardDescription>
+						</CardHeader>
+						<CardContent>Empty Container</CardContent>
+						<CardFooter>
+							<Button className="w-full">Footer button</Button>
+						</CardFooter>
+					</Card>
+				),
+				node: (
+					<NodeCard
+						title="Custom Title1"
+						description="Custom Description1"
+						content="Custom Content1"
+						footerButtonText="Custom Button1"
+					/>
+				)
 			}
 		]
 	},
