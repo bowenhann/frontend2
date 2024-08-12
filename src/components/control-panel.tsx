@@ -9,13 +9,13 @@ import { renderComponents } from '@/lib/componentRenderer'
 import { componentMap } from "@/lib/component-map";
 
 const componentNameMap = {
-  NodeButton: 'Button',
-  NodeCard: 'Card',
-  NodeCardHeader: 'CardHeader',
-  NodeCardContent: 'CardContent',
-  NodeCardFooter: 'CardFooter',
-  NodeCardTitle: 'CardTitle',
-  NodeCardDescription: 'CardDescription'
+  Button: 'NodeButton',
+  Card: 'NodeCard',
+  CardHeader: 'NodeCardHeader',
+  CardContent: 'NodeCardContent',
+  CardFooter: 'NodeCardFooter',
+  CardTitle: 'NodeCardTitle',
+  CardDescription: 'NodeCardDescription'
   // Add mappings for other components as needed
 };
 
@@ -147,6 +147,7 @@ export const ControlPanel = () => {
             const bgColorClass = generateRandomBgColor();
             const variantProps = { ...props, className: `${props.className || ''} ${bgColorClass}`.trim() };
             const variantString = generateComponentString(type, variantProps, props.children || '');
+            console.log("Variantstring", variantString)
             return { string: variantString, props: variantProps };
           })
         ];
