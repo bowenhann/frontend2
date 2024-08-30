@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNode } from '@craftjs/core';
+import { fetchEventSource } from '@microsoft/fetch-event-source';
 import {
   SandpackProvider,
   SandpackLayout,
@@ -17,109 +18,64 @@ export const CodeGenerator = () => {
   const [sessionId, setSessionId] = useState('');
   const [prompt, setPrompt] = useState('');
   const [mode, setMode] = useState('DETAIL');
-  const [generatedCode, setGeneratedCode] = useState(defaultCode);
+  const [content, setContent] = useState(defaultCode);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [isCodeViewerVisible, setIsCodeViewerVisible] = useState(false);
   const [key, setKey] = useState(0);
 
-  const generateCode = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setContent('');
     setIsLoading(true);
-    setError(null);
-    setGeneratedCode('');
-
     try {
-      const response = await fetch('https://api-dev.aictopusde.com/api/v1/ai/generate-pages', {
+      await fetchEventSource('https://api-dev.aictopusde.com/api/v1/ai/generate-pages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhaWN0b3B1cyIsImlhdCI6MTcyNDAyOTYzNiwiZXhwIjoxODk2ODI5NjM2fQ.2B2fARX74hql9eeZyqbc9Wh2ibtMLTaH0W2Ri0XnEINcoKT41tcQBF0zn-shdx_s30CRtPpwzrCkFg7BZVKCkA',
+          'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhaWN0b3B1cyIsImlhdCI6MTcyNDAyOTYzNiwiZXhwIjoxODk2ODI5NjM2fQ.2B2fARX74hql9eeZyqbc9Wh2ibtMLTaH0W2Ri0XnEINcoKT41tcQBF0zn-shdx_s30CRtPpwzrCkFg7BZVKCkA', 
         },
         body: JSON.stringify({
           sessionId,
           prompt,
           mode,
         }),
-      });
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder('utf-8');
-      let done = false;
-      let partialChunk = "";
-
-      let buffer = '';
-      let isInDataSection = false;
-      
-      while (!done) {
-        const { value, done: readerDone } = await reader.read();
-        done = readerDone;
-        if (value) {
-          let chunk = decoder.decode(value, { stream: true });
-          chunk = buffer + chunk;
-          
-          const lines = chunk.split('\n');
-          let processedChunk = '';
-          
-          for (const line of lines) {
-            if (line.startsWith('data:')) {
-              isInDataSection = true;
-              const content = line.slice(5).trim();
-              if (content) {
-                processedChunk += content;
-              }
-            } else if (isInDataSection && line.trim() === '') {
-              isInDataSection = false;
-              processedChunk += '\n';
-            }
+        async onopen(response) {
+          if (response.ok && response.headers.get('content-type') === 'text/event-stream') {
+            console.log('连接已建立');
+          } else {
+            console.error('连接失败', response);
+            throw new Error('连接失败');
           }
-          
-          buffer = isInDataSection ? lines[lines.length - 1] : '';
-          
-          // Replace single newlines with space, keep double newlines
-          processedChunk = processedChunk.replace(/\n(?!\n)/g, ' ').replace(/\n\n/g, '\n');
-          
-          setGeneratedCode(prevCode => prevCode + processedChunk);
-        }
-      }
-      
-      // Process any remaining buffer content
-      if (buffer) {
-        const content = buffer.slice(5).trim();
-        if (content) {
-          setGeneratedCode(prevCode => prevCode + content);
-        }
-      }
-  
-      setGeneratedCode(prevCode => {
-        let cleanedCode = prevCode.trim();
-        if (cleanedCode.startsWith('```jsx')) {
-          cleanedCode = cleanedCode.slice(6);
-        }
-        // if (cleanedCode.endsWith('```')) {
-
-        // }
-        return cleanedCode;
+        },
+        onmessage(event) {
+          let line = event.data;
+          line = line.replace(/data:\s*/g, '');
+          if (line == ""){
+            setContent(prevContent => prevContent + " ");
+          } else {
+            setContent(prevContent => prevContent + line);
+          }
+        },
+        onerror(err) {
+          console.error('EventSource failed:', err);
+          setIsLoading(false);
+        },
+        openWhenHidden: true,
       });
     } catch (error) {
-      console.error('Error generating code:', error);
-      setError('Error when generating code');
+      console.error('获取数据时出错:', error);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!isLoading && generatedCode !== defaultCode) {
       setKey(prevKey => prevKey + 1);
     }
-  }, [isLoading, generatedCode]);
+  };
 
   return (
     <div 
       ref={(ref) => connect(drag(ref) as any)}
       className="p-4 max-w-4xl mx-auto border border-gray-300 rounded"
     >
-      <div className="mb-4">
+      <form onSubmit={handleSubmit} className="mb-4">
         <input
           type="text"
           value={sessionId}
@@ -143,13 +99,13 @@ export const CodeGenerator = () => {
           <option value="SUMMARY">SUMMARY</option>
         </select>
         <button
-          onClick={generateCode}
+          type="submit"
           disabled={isLoading}
           className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
         >
           {isLoading ? 'Generating...' : 'Generate Code'}
         </button>
-      </div>
+      </form>
 
       <div className="mt-4">
         <SandpackProvider
@@ -157,7 +113,7 @@ export const CodeGenerator = () => {
           template="react"
           files={{
             "/App.js": {
-              code: generatedCode,
+              code: content,
               active: true
             },
           }}
@@ -180,20 +136,12 @@ export const CodeGenerator = () => {
                 <button className="absolute top-0 right-0 bg-gray-200 px-2 py-1 text-sm">
                   Code
                 </button>
-                {/* {isCodeViewerVisible && (
-                  <div className="absolute top-8 right-0 w-64 h-64 overflow-auto">
-                    <SandpackCodeEditor showLineNumbers />
-                  </div>
-                )} */}
-                
               </div>
             )}
-                                <SandpackCodeEditor showLineNumbers />
-
+            <SandpackCodeEditor showLineNumbers />
           </SandpackLayout>
         </SandpackProvider>
       </div>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 };
