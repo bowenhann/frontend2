@@ -15,7 +15,7 @@ const defaultCode = `export default function App() {
 
 export const CodeGenerator = () => {
   const { connectors: { connect, drag } } = useNode();
-  const [sessionId, setSessionId] = useState('');
+  const [sessionId, setSessionId] = useState('0125');
   const [prompt, setPrompt] = useState('');
   const [mode, setMode] = useState('DETAIL');
   const [content, setContent] = useState(defaultCode);
@@ -76,13 +76,13 @@ export const CodeGenerator = () => {
       className="p-4 max-w-4xl mx-auto border border-gray-300 rounded"
     >
       <form onSubmit={handleSubmit} className="mb-4">
-        <input
+        {/* <input
           type="text"
           value={sessionId}
           onChange={(e) => setSessionId(e.target.value)}
           placeholder="Enter session ID"
           className="w-full p-2 mb-2 border border-gray-300 rounded"
-        />
+        /> */}
         <input
           type="text"
           value={prompt}
@@ -90,14 +90,14 @@ export const CodeGenerator = () => {
           placeholder="Enter your prompt"
           className="w-full p-2 mb-2 border border-gray-300 rounded"
         />
-        <select
+        {/* <select
           value={mode}
           onChange={(e) => setMode(e.target.value)}
           className="w-full p-2 mb-2 border border-gray-300 rounded"
         >
           <option value="DETAIL">DETAIL</option>
           <option value="SUMMARY">SUMMARY</option>
-        </select>
+        </select> */}
         <button
           type="submit"
           disabled={isLoading}

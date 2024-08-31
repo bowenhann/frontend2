@@ -11,8 +11,6 @@ import { componentsMap } from '@/components/node/components-map'
 import { DynamicContent } from '@/components/dynamicContent';
 import { componentMap } from '@/lib/component-map'
 import { componentStrings } from '@/lib/test-string'
-import { CodeGenerator } from '@/components/codeGenerator'
-import { ResizableComponent } from '@/components/resizableComponent'
 
 interface NewContentProps {
   buttonStrings: string[];

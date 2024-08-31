@@ -7,7 +7,10 @@ const componentStrings1 = [
 
 export const componentStrings = [
 `
-<ResizableComponent width="100%" height="90%" className="p-4">
+<ResizableComponent width="45%" height="40%" className="p-4">
+  <CodeGenerator />
+</ResizableComponent>
+<ResizableComponent width="40%" height="40%" className="p-4">
   <CodeGenerator />
 </ResizableComponent>
 `
