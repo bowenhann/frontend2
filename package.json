@@ -11,6 +11,10 @@
   "dependencies": {
     "@aws-amplify/backend": "^1.0.4",
     "@aws-amplify/cli": "^12.12.6",
+<<<<<<< HEAD
+=======
+    "@codesandbox/sandpack-react": "^2.19.0",
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
     "@craftjs/core": "^0.2.10",
     "@epic-web/client-hints": "^1.2.2",
     "@microsoft/fetch-event-source": "^2.0.1",
@@ -35,22 +39,31 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
+<<<<<<< HEAD
     "@xyflow/react": "^12.2.0",
     "babel-plugin-react-css-modules": "^5.2.6",
+=======
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
     "cookie": "^0.6.0",
+<<<<<<< HEAD
     "framer-motion": "^11.3.28",
     "html-react-parser": "^5.1.12",
     "http-proxy-middleware": "^3.0.0",
     "isbot": "^3.6.8",
     "jsplumbtoolkit": "^2.4.2",
+=======
+    "html-react-parser": "^5.1.12",
+    "isbot": "^3.6.8",
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
     "lucide-react": "^0.308.0",
     "next": "14.2.4",
     "next-themes": "^0.3.0",
     "radix-ui": "^1.0.1",
     "re-resizable": "^6.9.17",
+<<<<<<< HEAD
     "react": "^18.3.1",
     "react-code-blocks": "^0.1.6",
     "react-contenteditable": "^3.3.7",
@@ -60,6 +73,14 @@
     "react-dom": "^18.3.1",
     "react-error-boundary": "^4.0.13",
     "react-flow-renderer": "^10.3.17",
+=======
+    "react": "^18.2.0",
+    "react-code-blocks": "^0.1.6",
+    "react-contenteditable": "^3.3.7",
+    "react-day-picker": "^8.10.1",
+    "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.13",
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
     "react-frame-component": "^5.2.6",
     "react-hook-form": "^7.52.2",
     "react-jsx-parser": "^2.0.0",

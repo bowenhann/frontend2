@@ -36,7 +36,11 @@ function createComponent(name, props, children) {
         </Element>
       );
     } else if (Component === DynamicContent) {
+<<<<<<< HEAD
       console.log('Creating DynamicContent');
+=======
+      console.log('Creating DynamicContent',);
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
       return (
         <Element
           key={Math.random()}
@@ -54,7 +58,29 @@ function createComponent(name, props, children) {
     }
   } else {
     // Handle native HTML elements
+<<<<<<< HEAD
     return React.createElement(name, { key: Math.random(), ...props }, children);
+=======
+    const processedChildren = children.map(child => {
+      if (React.isValidElement(child)) {
+        // If the child is already a React element, return it as is
+        return child;
+      } else if (typeof child === 'string') {
+        // If the child is a string, return it as is
+        return child;
+      } else if (Array.isArray(child)) {
+        // If the child is an array, recursively process it
+        return child.map(subChild => createComponent(subChild.type, subChild.props, subChild.props.children));
+      } else if (typeof child === 'object' && child !== null) {
+        // If the child is an object (likely a VDOM representation), convert it to a React element
+        return createComponent(child.type, child.props, child.props.children);
+      }
+      // If it's none of the above, return null (this shouldn't happen in normal circumstances)
+      return null;
+    }).filter(child => child !== null);
+    console.log(`Creating component: ${name}`, processedChildren); // Add logging
+    return React.createElement(name, { key: Math.random(), ...props }, ...processedChildren);
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
   }
 }
 // function createComponent(name, props, children) {

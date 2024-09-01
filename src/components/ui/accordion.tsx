@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// @/components/ui/accordion.tsx
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 "use client"
 
 import * as React from "react"

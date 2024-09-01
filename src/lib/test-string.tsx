@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// @/lib/test-string.tsx
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 const componentStrings1 = [
   `<ResizableComponent width='100%' height='10%'> <NodeHeader className='bg-gray-800 text-white py-4'> <NodeLogo className='text-xl font-bold'>My Website</NodeLogo> <NodeMenu className='flex'> <NodeMenuItem className='ml-6'>Home</NodeMenuItem> <NodeMenuItem className='ml-6'>About</NodeMenuItem> <NodeMenuItem className='ml-6'>Services</NodeMenuItem> <NodeMenuItem className='ml-6'>Contact</NodeMenuItem> </NodeMenu> </NodeHeader> </ResizableComponent>`,
   `<ResizableComponent width='100%' height='50%'> <NodeHero className='bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center'> <NodeHeroHeading className='text-4xl font-bold text-white'>Welcome to My Website</NodeHeroHeading> <NodeButton className='bg-white text-purple-500 px-6 py-3 rounded-full mt-8'>Get Started</NodeButton> </NodeHero> </ResizableComponent>`,
@@ -5,6 +9,7 @@ const componentStrings1 = [
 ];
 
 export const componentStrings = [
+<<<<<<< HEAD
   // Header
   `
   <ResizableComponent width="100%" height="10%" className="bg-gradient-to-br from-purple-500 via-pink-500 to-red-500">
@@ -16,6 +21,80 @@ export const componentStrings = [
         </div>
       </NodeCardHeader>c
     </NodeCard>
+=======
+`
+<ResizableComponent width="45%" height="40%" className="p-4">
+  <CodeGenerator />
+</ResizableComponent>
+<ResizableComponent width="40%" height="40%" className="p-4">
+  <CodeGenerator />
+</ResizableComponent>
+`
+  ];
+  
+
+export const componentStrings3 = [`
+<ResizableComponent width="100%" height="auto" className="p-4">
+  <NodeCard className="w-full">
+    <NodeCardHeader>
+      <NodeCardTitle>Welcome to Our Mixed Component Test</NodeCardTitle>
+      <NodeCardDescription>This example demonstrates both custom components and raw HTML elements.</NodeCardDescription>
+    </NodeCardHeader>
+    <NodeCardContent>
+      <div className="space-y-4">
+        <NodeAccordion type="single" collapsible>
+          <NodeAccordionItem value="item-1">
+            <NodeAccordionTrigger>Custom Components Section</NodeAccordionTrigger>
+            <NodeAccordionContent>
+              <NodeButton className="mr-2">Click Me!</NodeButton>
+              <NodeBadge variant="outline">New Feature</NodeBadge>
+              <NodeAvatar src="https://github.com/shadcn.png" fallback="CN" />
+            </NodeAccordionContent>
+          </NodeAccordionItem>
+        </NodeAccordion>
+        
+        <div className="bg-gray-100 p-4 rounded-md">
+          <h3 className="text-lg font-semibold mb-2">Raw HTML Section</h3>
+          <p>This is a paragraph with <strong>bold</strong> and <em>italic</em> text.</p>
+          <ul>
+            <li>List item 1</li>
+            <li>List item 2</li>
+            <li>List item 3</li>
+          </ul>
+        </div>
+        
+        <NodeAlert>
+          <NodeAlertTitle>Heads up!</NodeAlertTitle>
+          <NodeAlertDescription>
+            This is an example of nested components with raw HTML.
+          </NodeAlertDescription>
+        </NodeAlert>
+      </div>
+    </NodeCardContent>
+    <NodeCardFooter>
+      <NodeButton variant="outline">Cancel</NodeButton>
+      <NodeButton>Submit</NodeButton>
+    </NodeCardFooter>
+  </NodeCard>
+</ResizableComponent>
+`];
+
+export const componentStrings2 = [
+  // Header
+  `
+  <ResizableComponent width="100%" height="10%" className="bg-gradient-to-br from-purple-500 via-pink-500 to-red-500">
+
+    <NodeCard className="w-full">
+						<NodeCardHeader>
+							<NodeCardTitle>Card Title</NodeCardTitle>
+							<NodeCardDescription>Card Description</NodeCardDescription>
+						</NodeCardHeader>
+						<NodeCardContent></NodeCardContent>
+						<NodeCardFooter>
+							<NodeButton className="w-full">Footer button</NodeButton>
+						</NodeCardFooter>
+					</NodeCard>
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
   </ResizableComponent>
   `,
 
@@ -25,9 +104,15 @@ export const componentStrings = [
     <NodeCard className="h-full bg-white rounded-lg shadow-lg overflow-hidden">
       <NodeCardContent className="h-full p-6">
         <NodeAccordion type="single" collapsible className="h-full">
+<<<<<<< HEAD
           <NodeAccordion.Item value="item-1" className="h-full">
             <NodeAccordion.Trigger>Interactive Elements</NodeAccordion.Trigger>
             <NodeAccordion.Content className="h-full">
+=======
+          <NodeAccordionItem value="item-1" className="h-full">
+            <NodeAccordionTrigger>Interactive Elements</NodeAccordionTrigger>
+            <NodeAccordionContent className="h-full">
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
               <div className="space-y-4 h-full flex flex-col justify-center">
                 <NodeButton className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-md hover:from-green-500 hover:to-blue-600 transition-all duration-300">
                   Gradient Button
@@ -35,8 +120,13 @@ export const componentStrings = [
                 <NodeCheckbox label="Check me!" className="text-indigo-600" />
     <Input id="input" type={type} placeholder={placeholder} {...props} />
               </div>
+<<<<<<< HEAD
             </NodeAccordion.Content>
           </NodeAccordion.Item>
+=======
+            </NodeAccordionContent>
+          </NodeAccordionItem>
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
         </NodeAccordion>
       </NodeCardContent>
     </NodeCard>
@@ -49,6 +139,7 @@ export const componentStrings = [
     <NodeCard className="h-full bg-white rounded-lg shadow-lg overflow-hidden">
       <NodeCardContent className="h-full p-6">
         <NodeAccordion type="single" collapsible className="h-full">
+<<<<<<< HEAD
           <NodeAccordion.Item value="item-2" className="h-full">
             <NodeAccordion.Trigger>Visual Elements</NodeAccordion.Trigger>
             <NodeAccordion.Content className="h-full">
@@ -58,12 +149,28 @@ export const componentStrings = [
                   Premium User
                 </NodeBadge>
                 <NodeAlert variant="info" className="bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-500">
+=======
+          <NodeAccordionItem value="item-2" className="h-full">
+            <NodeAccordionTrigger>Visual Elements</NodeAccordionTrigger>
+            <NodeAccordionContent className="h-full">
+              <div className="space-y-4 h-full flex flex-col justify-center">
+                <NodeAvatar src="https://example.com/avatar.jpg" alt="User Avatar" className="w-16 h-16 rounded-full border-4 border-gradient-to-r from-yellow-400 to-orange-500" />
+                <NodeBadge variant="outline" className="bg-gradient-to-r from-green-400 to-blue-500 text-white">
+                  Premium User
+                </NodeBadge>
+                <NodeAlert variant="info" className="bg-gradient-to-r from-green-100 to-blue-500">
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
                   <NodeAlertTitle>Info</NodeAlertTitle>
                   <NodeAlertDescription>This is an informational alert with a gradient background.</NodeAlertDescription>
                 </NodeAlert>
               </div>
+<<<<<<< HEAD
             </NodeAccordion.Content>
           </NodeAccordion.Item>
+=======
+            </NodeAccordionContent>
+          </NodeAccordionItem>
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
         </NodeAccordion>
       </NodeCardContent>
     </NodeCard>
@@ -79,9 +186,15 @@ export const componentStrings = [
           <NodeCollapsible.Trigger className="w-full p-4 text-left font-medium bg-gradient-to-r from-gray-50 to-gray-100">
             Toggle Calendar
           </NodeCollapsible.Trigger>
+<<<<<<< HEAD
           <NodeCollapsible.Content className="p-4 h-[calc(100%-3rem)]">
             <NodeCalendar className="h-full bg-white shadow-md rounded-lg" />
           </NodeCollapsible.Content>
+=======
+          <NodeCollapsibleContent className="p-4 h-[calc(100%-3rem)]">
+            <NodeCalendar className="h-full bg-white shadow-md rounded-lg" />
+          </NodeCollapsibleContent>
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
         </NodeCollapsible>
       </NodeCardContent>
     </NodeCard>

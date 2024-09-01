@@ -49,8 +49,13 @@ import {
 } from '@/components/ui/alert-dialog'
 import { ResizableComponent } from '../resizableComponent'
 import { Element } from '@craftjs/core'
+<<<<<<< HEAD
 import { NodeAlert } from '../node/alert'
 import { Alert, AlertTitle, AlertDescription } from '../ui/alert'
+=======
+import { Alert, AlertTitle, AlertDescription } from '../ui/alert'
+import { NodeAlert, NodeAlertTitle, NodeAlertDescription } from '../node/alert'
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 import { NodeAspectRatio } from './aspect-ratio'
 import { AspectRatio } from '../ui/aspect-ratio'
 import { Badge } from '../ui/badge'
@@ -287,7 +292,11 @@ export const componentsMap: Components[] = [
 		name: 'Containers',
 		items: [
 			{
+<<<<<<< HEAD
 				name: 'Resizable Container',
+=======
+				name: 'Header',
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 				demo: (
 					<div
 						style={{
@@ -297,18 +306,48 @@ export const componentsMap: Components[] = [
 							padding: '10px'
 						}}
 					>
+<<<<<<< HEAD
 						Resizable Container
 					</div>
 				),
 				node: (
 					<Element is={ResizableComponent} canvas>
 						Resizable Content
+=======
+						Header
+					</div>
+				),
+				node: (
+					<Element is={ResizableComponent} height="5%" canvas>
+						Header
+					</Element>
+				)
+			},
+			{
+				name: 'Sidebar',
+				demo: (
+					<div
+						style={{
+							width: '200px',
+							height: '100px',
+							border: '1px solid #ccc',
+							padding: '10px'
+						}}
+					>
+						Sidebar
+					</div>
+				),
+				node: (
+					<Element is={ResizableComponent} height="50%" width="10%" canvas>
+						Sidebar
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 					</Element>
 				)
 			}
 		]
 	},
 	{
+<<<<<<< HEAD
 		name: 'Accordion',
 		items: [
 			{
@@ -365,6 +404,59 @@ export const componentsMap: Components[] = [
 			}
 		]
 	},
+=======
+    name: 'Accordion',
+    items: [
+      {
+        name: 'Accordion',
+        demo: (
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Is it accessible?</AccordionTrigger>
+              <AccordionContent>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Is it styled?</AccordionTrigger>
+              <AccordionContent>
+                Yes. It comes with default styles that matches the other components aesthetic.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>Is it animated?</AccordionTrigger>
+              <AccordionContent>
+                Yes. Its animated by default, but you can disable it if you prefer.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        ),
+        node: (
+          <NodeAccordion type="single" collapsible className="w-full">
+            <NodeAccordionItem value="item-1">
+              <NodeAccordionTrigger>Is it accessible?</NodeAccordionTrigger>
+              <NodeAccordionContent>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </NodeAccordionContent>
+            </NodeAccordionItem>
+            <NodeAccordionItem value="item-2">
+              <NodeAccordionTrigger>Is it styled?</NodeAccordionTrigger>
+              <NodeAccordionContent>
+                Yes. It comes with default styles that matches the other components aesthetic.
+              </NodeAccordionContent>
+            </NodeAccordionItem>
+            <NodeAccordionItem value="item-3">
+              <NodeAccordionTrigger>Is it animated?</NodeAccordionTrigger>
+              <NodeAccordionContent>
+                Yes. Its animated by default, but you can disable it if you prefer.
+              </NodeAccordionContent>
+            </NodeAccordionItem>
+          </NodeAccordion>
+        ),
+      },
+    ],
+  },
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 	{
 		name: 'Avatar',
 		items: [
@@ -419,6 +511,7 @@ export const componentsMap: Components[] = [
 		]
 	},
 	{
+<<<<<<< HEAD
 		name: 'Feedback',
 		items: [
 			{
@@ -435,6 +528,31 @@ export const componentsMap: Components[] = [
 			}
 		]
 	},
+=======
+    name: 'Alert',
+    items: [
+      {
+        name: 'Alert',
+        demo: (
+          <Alert>
+            <AlertTitle>Heads up!</AlertTitle>
+            <AlertDescription>
+              You can add components to your app using the shadcn/ui CLI.
+            </AlertDescription>
+          </Alert>
+        ),
+        node: (
+          <NodeAlert>
+            <NodeAlertTitle>Heads up!</NodeAlertTitle>
+            <NodeAlertDescription>
+              You can add components to your app using the shadcn/ui CLI.
+            </NodeAlertDescription>
+          </NodeAlert>
+        ),
+      },
+    ],
+  },
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 	{
 		name: 'Layout',
 		items: [
@@ -454,7 +572,11 @@ export const componentsMap: Components[] = [
 		]
 	},
 	{
+<<<<<<< HEAD
 		name: 'Data Display',
+=======
+		name: 'Badge',
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 		items: [
 			{
 				name: 'Badge',
@@ -464,6 +586,7 @@ export const componentsMap: Components[] = [
 		]
 	},
 	{
+<<<<<<< HEAD
 		name: 'Forms',
 		items: [
 			// ... (existing form components)
@@ -479,6 +602,22 @@ export const componentsMap: Components[] = [
 			}
 		]
 	},
+=======
+    name: 'Checkbox',
+    items: [
+      {
+        name: 'Checkbox',
+        demo: (
+          <div className="flex items-center space-x-2">
+            <Checkbox id="terms" />
+            <Label htmlFor="terms">Accept terms and conditions</Label>
+          </div>
+        ),
+        node: <NodeCheckbox label="Accept terms and conditions" />
+      }
+    ]
+  },
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 	{
 		name: 'Disclosure',
 		items: [
@@ -592,7 +731,11 @@ export const componentsMap: Components[] = [
 		]
 	},
 	{
+<<<<<<< HEAD
 		name: 'Forms',
+=======
+		name: 'Input',
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 		items: [
 			// ... (existing form components)
 			{
@@ -661,4 +804,8 @@ export const componentsMap: Components[] = [
 			}
 		]
 	}
+<<<<<<< HEAD
 ]
+=======
+]
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406

@@ -1,4 +1,8 @@
 import { Element } from '@craftjs/core'
+<<<<<<< HEAD
+=======
+import { CodeGenerator } from '@/components/codeGenerator'
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 import { ResizableComponent } from '@/components/resizableComponent'
 import { NodeButton } from '@/components/node/button'
 import {
@@ -18,7 +22,11 @@ import {
 } from '@/components/node/accordion'
 import { NodeAvatar } from '@/components/node/avatar'
 import { NodeAlertDialog } from '@/components/node/alert-dialog'
+<<<<<<< HEAD
 import { NodeAlert } from '@/components/node/alert'
+=======
+import { NodeAlert, NodeAlertTitle, NodeAlertDescription } from '@/components/node/alert'
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 import { NodeAspectRatio } from '@/components/node/aspect-ratio'
 import { DynamicContent } from '@/components/dynamicContent'
 import { NodeBadge } from '@/components/node/badge'
@@ -54,8 +62,26 @@ export const componentMap = {
 	NodeCardContent,
 	NodeCardFooter,
 	NodeCalendar,
+<<<<<<< HEAD
 	div: 'div',
 	span: 'span',
+=======
+	// div: 'div',
+	// span: 'span',
+	// p: 'p',
+	// h1: 'h1',
+	// h2: 'h2',
+	// h3: 'h3',
+	// h4: 'h4',
+	// h5: 'h5',
+	// h6: 'h6',
+	// li: 'li',
+	// ul: 'ul',
+	// ol: 'ol',
+	// em: 'em',
+	// strong: 'strong',
+	CodeGenerator,
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 	ResizableComponent,
 	NodeAccordion,
 	NodeAccordionTrigger,
@@ -65,6 +91,10 @@ export const componentMap = {
 	NodeAvatar,
 	NodeAlertDialog,
 	NodeAlert,
+<<<<<<< HEAD
+=======
+	NodeAlertTitle, NodeAlertDescription,
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 	NodeBadge,
 	NodeCollapsible,
 	NodeCheckbox,
@@ -106,6 +136,11 @@ export const componentNameMap = {
 	Avatar: 'NodeAvatar',
 	AlertDialog: 'NodeAlertDialog',
 	Alert: 'NodeAlert',
+<<<<<<< HEAD
+=======
+	AlertTitle: 'NodeAlertTitle',
+	AlertDescription: 'NodeAlertDescription',
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 	Checkbox: 'NodeCheckbox',
 	Collapsible: 'NodeCollapsible',
 	Command: 'NodeCommand',

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// @/components/settings/accordion
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 import React from 'react';
 import { useNode } from '@craftjs/core';
 import { Input } from '@/components/ui/input';
@@ -5,6 +9,26 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+<<<<<<< HEAD
+=======
+const TextSetting = ({ propName, label }) => {
+  const { actions: { setProp }, props } = useNode((node) => ({
+    props: node.data.props,
+  }));
+
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={propName}>{label}</Label>
+      <Input
+        id={propName}
+        value={props[propName] || ''}
+        onChange={(e) => setProp((props) => (props[propName] = e.target.value))}
+      />
+    </div>
+  );
+};
+
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 export const AccordionSettings = () => {
   const { actions: { setProp }, props } = useNode((node) => ({
     props: node.data.props,
@@ -12,6 +36,7 @@ export const AccordionSettings = () => {
 
   return (
     <div className="space-y-4">
+<<<<<<< HEAD
       <div>
         <Label htmlFor="type">Accordion Type</Label>
         <Select
@@ -19,6 +44,16 @@ export const AccordionSettings = () => {
           onValueChange={(value) => setProp((props: any) => (props.type = value))}
         >
           <SelectTrigger id="type">
+=======
+      <TextSetting propName="className" label="Class Name" />
+      <div className="space-y-2">
+        <Label htmlFor="type">Type</Label>
+        <Select
+          onValueChange={(value) => setProp((props) => (props.type = value))}
+          value={props.type}
+        >
+          <SelectTrigger>
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
             <SelectValue placeholder="Select type" />
           </SelectTrigger>
           <SelectContent>
@@ -27,6 +62,7 @@ export const AccordionSettings = () => {
           </SelectContent>
         </Select>
       </div>
+<<<<<<< HEAD
 
       {props.type === 'single' && (
         <div className="flex items-center space-x-2">
@@ -83,4 +119,40 @@ export const AccordionSettings = () => {
       </div>
     </div>
   );
+=======
+      <div className="flex items-center space-x-2">
+        <Switch
+          id="collapsible"
+          checked={props.collapsible}
+          onCheckedChange={(checked) => setProp((props) => (props.collapsible = checked))}
+        />
+        <Label htmlFor="collapsible">Collapsible</Label>
+      </div>
+    </div>
+  );
+};
+
+export const AccordionItemSettings = () => {
+  return (
+    <div className="space-y-4">
+      <TextSetting propName="value" label="Value" />
+    </div>
+  );
+};
+
+export const AccordionTriggerSettings = () => {
+  return (
+    <div className="space-y-4">
+      <TextSetting propName="children" label="Trigger Text" />
+    </div>
+  );
+};
+
+export const AccordionContentSettings = () => {
+  return (
+    <div className="space-y-4">
+      <TextSetting propName="children" label="Content" />
+    </div>
+  );
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 };

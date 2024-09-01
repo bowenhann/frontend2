@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { withNode } from '@/components/node/connector';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -24,10 +25,28 @@ const AvatarComponent: React.FC<AvatarComponentProps> = ({
     <Avatar className={cn(className)} {...props}>
       {src && <AvatarImage src={src} alt={alt} />}
       <AvatarFallback>{fallback}</AvatarFallback>
+=======
+// @/components/node/avatar.tsx
+import React from 'react';
+import { useNode } from '@craftjs/core';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { AvatarSettings } from '@/components/settings/avatar';
+
+export const NodeAvatar = ({ ...props }) => {
+  const { connectors: { connect, drag } } = useNode();
+  return (
+    <Avatar 
+      {...props} 
+      ref={(ref) => ref && connect(drag(ref)) as any}
+    >
+      <AvatarImage src={props.src} alt={props.alt} />
+      <AvatarFallback>{props.fallback}</AvatarFallback>
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
     </Avatar>
   );
 };
 
+<<<<<<< HEAD
 const draggable = true;
 
 // 使用 Partial 使所有属性变为可选
@@ -62,3 +81,16 @@ export const NodeAvatar = Object.assign(NodeAvatarBase, {
     };
   };
 });
+=======
+NodeAvatar.craft = {
+  displayName: 'Avatar',
+  props: {
+    src: 'https://github.com/shadcn.png',
+    alt: '@shadcn',
+    fallback: 'CN',
+  },
+  related: {
+    toolbar: AvatarSettings,
+  },
+};
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406

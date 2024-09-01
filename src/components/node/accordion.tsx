@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable react/display-name */
 // import React from 'react';
 // import { useNode } from '@craftjs/core';
@@ -78,12 +79,33 @@ export const NodeAccordion = ({
       disabled={disabled}
       className={cn(className)}
       {...props}
+=======
+// @/components/node/accordion
+import React from 'react';
+import { useNode } from '@craftjs/core';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/accordion';
+import { AccordionSettings, AccordionItemSettings, AccordionTriggerSettings, AccordionContentSettings } from '@/components/settings/accordion';
+
+export const NodeAccordion = ({ children, ...props }) => {
+  const { connectors: { connect, drag } } = useNode();
+  return (
+    <Accordion 
+      {...props} 
+      ref={(ref) => ref && connect(drag(ref)) as any}
+      type={props.type}
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
     >
       {children}
     </Accordion>
   );
 };
 
+<<<<<<< HEAD
 NodeAccordion.Item = ({ value, className = '', children }) => {
   return (
     <AccordionItem value={value} className={cn(className)}>
@@ -98,12 +120,25 @@ NodeAccordion.Trigger = ({ children }) => {
 
 NodeAccordion.Content = ({ children }) => {
   return <AccordionContent>{children}</AccordionContent>;
+=======
+export const NodeAccordionItem = ({ children, ...props }) => {
+  return <AccordionItem value={''} {...props}>{children}</AccordionItem>;
+};
+
+export const NodeAccordionTrigger = ({ children, ...props }) => {
+  return <AccordionTrigger {...props}>{children}</AccordionTrigger>;
+};
+
+export const NodeAccordionContent = ({ children, ...props }) => {
+  return <AccordionContent {...props}>{children}</AccordionContent>;
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 };
 
 NodeAccordion.craft = {
   displayName: 'Accordion',
   props: {
     type: 'single',
+<<<<<<< HEAD
     collapsible: false,
     defaultValue: '',
     disabled: false,
@@ -162,5 +197,36 @@ NodeAccordionContent.craft = {
   displayName: 'Accordion Content',
   related: {
     toolbar: SettingsControl,
+=======
+    collapsible: true,
+    className: 'w-full',
+  },
+  related: {
+    toolbar: AccordionSettings,
+  },
+};
+
+NodeAccordionItem.craft = {
+  displayName: 'Accordion Item',
+  props: {},
+  related: {
+    toolbar: AccordionItemSettings,
+  },
+};
+
+NodeAccordionTrigger.craft = {
+  displayName: 'Accordion Trigger',
+  props: {},
+  related: {
+    toolbar: AccordionTriggerSettings,
+  },
+};
+
+NodeAccordionContent.craft = {
+  displayName: 'Accordion Content',
+  props: {},
+  related: {
+    toolbar: AccordionContentSettings,
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
   },
 };

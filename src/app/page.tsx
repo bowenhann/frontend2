@@ -188,6 +188,17 @@ const ContentUpdater = () => {
   return null;
 };
 
+<<<<<<< HEAD
+=======
+const mystring = `<h3 class="text-lg font-semibold mb-2">Raw HTML Section</h3>
+          <p>This is a paragraph with <strong>bold</strong> and <em>italic</em> text.</p>
+          <ul>
+            <li>List item 1</li>
+            <li>List item 2</li>
+            <li>List item 3</li>
+          </ul>`
+
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 // App component
 const App = () => {
 	return (
@@ -208,6 +219,10 @@ const App = () => {
 					<Viewport>
 						<Frame>
 							<Element is={Wrapper} canvas>
+<<<<<<< HEAD
+=======
+                {/* <CodeGenerator></CodeGenerator> */}
+>>>>>>> 0094435c05c11c83c1092fd7e2481f5413fa5406
 								<Element is={DynamicContent}>{null}</Element>
 							</Element>
 						</Frame>
